@@ -37,55 +37,50 @@ class DisposableAppDeleter
   end
 end
 
-class DisposableDeployer
+module DocumentsActions
+  def do_action(description)
+    print "  " + description + " ..."
+    yield
+    puts " DONE"
+  end
+end
 
-  def go
-    source_secrets
-    do_deploy
-  rescue 
-    cleanup_after_failure
-    raise
+class Deployer
+  include DocumentsActions
+
+  def initialize( app_name, uid = false )
+    @app_name = app_name
+    @uid = uid || `uuidgen`.chomp.downcase
+  end
+
+  def deploy
+    prep_temp_dir
+    setup_ssh_key
+    do_action('push git to heroku'){ push_head_to_app }
+
   ensure
     cleanup
   end
 
-  private
-
-  def do_deploy
-    prep_temp_dir
-
-    connect_to_heroku
-
-    perform('creating app'){ create_app }
-    puts "created http://#{@app_name}.herokuapp.com"
-
-    setup_ssh_key
-    push_head_to_app
-
-  end
+  private 
 
   def prep_temp_dir
-    @tmpdir = Pathname.new( Dir.tmpdir ).join('heroku-deployer').join(deploy_uuid)
+    @tmpdir = Pathname.new( Dir.tmpdir ).join('heroku-deployer').join(@uid)
     @tmpdir.mkpath
+  end
+
+  def cleanup
+    do_action( 'removing ssh key' ){ remove_ssh_key }
+    do_action( 'removing temp dir' ){ remove_temp_dir }
   end
 
   def remove_temp_dir
     @tmpdir.rmtree
   end
 
-  def connect_to_heroku
-    @heroku = Heroku::API.new()
-  end
-
-  def create_app
-    app_name = "disposable-#{deploy_uuid}"[0,30]
-    @heroku.post_app( name: app_name )
-    @app_name = app_name
-  end
-
   def setup_ssh_key
-    perform( 'creating ssh key' ){ create_ssh_key }
-    perform( 'adding ssh key' ){ add_ssh_key }
+    do_action( 'creating ssh key' ){ create_ssh_key }
+    do_action( 'adding ssh key' ){ add_ssh_key }
   end
 
   def create_ssh_key
@@ -97,7 +92,7 @@ class DisposableDeployer
   end
 
   def ssh_key_name
-    "deployer-#{deploy_uuid}"
+    "deployer-#{@uid}"
   end
 
   def public_ssh_key
@@ -105,11 +100,11 @@ class DisposableDeployer
   end
 
   def add_ssh_key
-    @heroku.post_key(public_ssh_key)
+    heroku.post_key(public_ssh_key)
   end
   
   def remove_ssh_key
-    @heroku.delete_key(ssh_key_name)
+    heroku.delete_key(ssh_key_name)
   end
 
   def push_head_to_app
@@ -128,20 +123,62 @@ class DisposableDeployer
   end
 
   def push_git
-    puts `echo GIT_SSH=#{custom_git_ssh_path} git push git@heroku.com:#{@app_name}.git HEAD`
+    system( {'GIT_SSH'=>custom_git_ssh_path.to_s}, "git push git@heroku.com:#{@app_name}.git HEAD" )
   end
 
   def custom_git_ssh_path
     @tmpdir.join('git-ssh')
   end
 
-  def cleanup_after_failure
-    destroy_app
+  def heroku
+    @heroku ||= Heroku::API.new()
+  end
+end
+
+class DisposableDeployer
+
+  def go
+    source_secrets
+    do_deploy
+  rescue 
+    cleanup_after_failure
+    raise
+  ensure
+    cleanup
+  end
+
+  private
+
+  def do_deploy
+    connect_to_heroku
+
+    perform('creating app'){ create_app }
+    puts "created http://#{@app_name}.herokuapp.com"
+
+    deploy_app
+
+  end
+
+  def connect_to_heroku
+    @heroku = Heroku::API.new()
+  end
+
+  def create_app
+    app_name = "disposable-#{deploy_uuid}"[0,30]
+    @heroku.post_app( name: app_name )
+    @app_name = app_name
+  end
+
+  def deploy_app
+    Deployer.new(@app_name,deploy_uuid).deploy
   end
 
   def cleanup
-    perform( 'removing ssh key' ){ remove_ssh_key }
-    perform( 'removing temp dir' ){ remove_temp_dir }
+    # nothing to be done for now
+  end
+
+  def cleanup_after_failure
+    destroy_app
   end
 
   def destroy_app
