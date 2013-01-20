@@ -10,9 +10,13 @@ module Deployer
     include DocumentsActions
     include TalksToHeroku
 
-    def initialize( app_name, uid = false )
+    def self.deploy(app_name)
+      new(app_name,CreatesUUIDs.generate_lowercase_uuid).deploy
+    end
+
+    def initialize( app_name, uid )
       @app_name = app_name
-      @uid = uid || CreatesUUIDs.generate_lowercase_uuid
+      @uid = uid
     end
 
     def deploy

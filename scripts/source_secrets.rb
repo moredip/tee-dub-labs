@@ -1,5 +1,3 @@
-require_relative 'deployer/disposable_deployer'
-
 def source_secrets
   secrets_file = File.expand_path( '../../.secrets', __FILE__ )
   return unless File.exists?(secrets_file)
@@ -11,6 +9,3 @@ def source_secrets
   end
   nil
 end
-
-source_secrets
-Deployer::DisposableDeployer.new.go
