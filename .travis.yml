@@ -4,8 +4,4 @@ script: env | sort | grep -v HEROKU_API_KEY
 after_script: ruby scripts/deploy_to_staging.rb
 env:
   global:
-  - secure: ! 'EQ3lm1ImwQ0QOsnbv5i8SPaU/3IQEVV3AvOz2P+4lgtTJzGxY7V5YTjPujik
-
-      /YuT3Xrwp22fDSLIV3JHDPpsnmUwtUF2T+6TkI9CDNVg10HyNsqwfqPD+cdO
-
-      GDZ5ijVfRyMYOFTktdCF6AiB31cZjroYBHD+CPBHwIgxwBpQA0Q='
+  - secure: "SftFNa3ZupZ71XqdZTIrMTWy+n4M0I0j7AYWY/5tO5MYvZatLkyDCq2dG0HrnvvKPfuGXQMU1dXA5bmvB7YIjxfnoXbm7drdWwoPQvM2J7mb+AWTif+ZnKd/SnjZQnXGn2YMJeIU6B+apuDUyOuLNi9lSQM3+mTu+XxnUE3M9X/fc="
