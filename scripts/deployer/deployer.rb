@@ -89,7 +89,7 @@ module Deployer
     end
 
     def push_git
-      system( {'GIT_SSH'=>custom_git_ssh_path.to_s}, "git push git@heroku.com:#{@app_name}.git HEAD" )
+      system( {'GIT_SSH'=>custom_git_ssh_path.to_s}, "git push git@heroku.com:#{@app_name}.git HEAD:master" )
     end
 
     def custom_git_ssh_path
