@@ -5,6 +5,10 @@ class TeeDubLabs < Sinatra::Base
     redirect '/projects'
   end
 
+  get '/stylesheets/style.css' do
+    scss :style
+  end
+
   get '/projects/?' do
     @projects = [
       OpenStruct.new( name: 'Some Project', description: 'some description' ),
