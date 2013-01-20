@@ -4,6 +4,39 @@ require 'tmpdir'
 
 require 'pry'
 
+def source_secrets
+  secrets_file = File.expand_path( '../../.secrets', __FILE__ )
+  return unless File.exists?(secrets_file)
+
+  File.readlines(secrets_file).each do |line|
+    (key,value) = line.split("=")
+    key.sub!(/^export /,'')
+    ENV[key] = value
+  end
+  nil
+end
+
+class DisposableAppDeleter
+  def self.delete_all
+    new.delete_all_apps
+  end
+
+  def delete_all_apps
+    apps = heroku.get_apps.body.map{ |h| h['name'] }
+    disposable_apps = apps.select{ |x| x.start_with?( 'disposable' ) }
+    disposable_apps.each do |app|
+      puts "deleting #{app}"
+      heroku.delete_app app
+    end
+  end
+
+  private
+  
+  def heroku
+    @heroku ||= Heroku::API.new()
+  end
+end
+
 class DisposableDeployer
 
   def go
@@ -27,7 +60,7 @@ class DisposableDeployer
     puts "created http://#{@app_name}.herokuapp.com"
 
     setup_ssh_key
-    #push_head_to_app
+    push_head_to_app
 
   end
 
@@ -79,6 +112,29 @@ class DisposableDeployer
     @heroku.delete_key(ssh_key_name)
   end
 
+  def push_head_to_app
+    setup_custom_git_ssh
+    push_git
+  end
+
+  def setup_custom_git_ssh
+   custom_git_ssh_path.open('w') do |f|
+     f.write <<-EOF
+       #!/bin/sh
+       exec ssh -i #{ssh_key_path.expand_path} -- "$@"
+     EOF
+   end
+   custom_git_ssh_path.chmod( 0740 )
+  end
+
+  def push_git
+    puts `echo GIT_SSH=#{custom_git_ssh_path} git push git@heroku.com:#{@app_name}.git HEAD`
+  end
+
+  def custom_git_ssh_path
+    @tmpdir.join('git-ssh')
+  end
+
   def cleanup_after_failure
     destroy_app
   end
@@ -90,17 +146,6 @@ class DisposableDeployer
 
   def destroy_app
     @heroku.delete_app( @app_name ) if @app_name
-  end
-
-  def source_secrets
-    secrets_file = File.expand_path( '../../.secrets', __FILE__ )
-    return unless File.exists?(secrets_file)
-
-    File.readlines(secrets_file).each do |line|
-      (key,value) = line.split("=")
-      key.sub!(/^export /,'')
-      ENV[key] = value
-    end
   end
 
   def deploy_uuid
@@ -115,5 +160,6 @@ class DisposableDeployer
 end
 
 if __FILE__ == $0
+  source_secrets
   DisposableDeployer.new.go
 end
