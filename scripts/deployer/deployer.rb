@@ -82,7 +82,7 @@ module Deployer
      custom_git_ssh_path.open('w') do |f|
        f.write <<-EOF
          #!/bin/sh
-         exec ssh -i #{ssh_key_path.expand_path} -- "$@"
+         exec ssh -o StrictHostKeychecking=no -o CheckHostIP=no -o UserKnownHostsFile=/dev/null -i #{ssh_key_path.expand_path} -- "$@"
        EOF
      end
      custom_git_ssh_path.chmod( 0740 )
