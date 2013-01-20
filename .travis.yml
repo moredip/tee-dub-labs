@@ -1,5 +1,5 @@
 bundler_args: --without development
-script: env
+script: "env | sort | grep -v HEROKU_API_KEY"
 after_script: ruby scripts/deploy_to_staging.rb
 
 env:
