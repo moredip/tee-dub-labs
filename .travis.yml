@@ -1,5 +1,5 @@
 bundler_args: --without development
-script: echo WE WILL ASSUME SUCCESS
+script: env
 after_script: ruby scripts/deploy_to_staging.rb
 
 env:
