@@ -1,7 +1,6 @@
 bundler_args: --without development
 script: "env | sort | grep -v HEROKU_API_KEY"
 after_script: ruby scripts/deploy_to_staging.rb
-
 env:
   global:
     - secure: "EQ3lm1ImwQ0QOsnbv5i8SPaU/3IQEVV3AvOz2P+4lgtTJzGxY7V5YTjPujik\n/YuT3Xrwp22fDSLIV3JHDPpsnmUwtUF2T+6TkI9CDNVg10HyNsqwfqPD+cdO\nGDZ5ijVfRyMYOFTktdCF6AiB31cZjroYBHD+CPBHwIgxwBpQA0Q="
