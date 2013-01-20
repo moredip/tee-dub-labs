@@ -1,9 +1,3 @@
-require 'sinatra/base'
+require File.expand_path( '../app/tee-dub-labs', __FILE__ )
 
-class MySimpleApp < Sinatra::Base  
-  get(/.+/) do
-    'hello world. I just got updated via a github edit.'
-  end
-end
-
-run MySimpleApp
+run TeeDubLabs

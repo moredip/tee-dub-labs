@@ -11,6 +11,7 @@ GEM
       debugger-ruby_core_source (>= 1.1.1)
     debugger-ruby_core_source (1.1.7)
     excon (0.16.10)
+    haml (3.1.7)
     heroku-api (0.3.7)
       excon (~> 0.16.10)
     method_source (0.8.1)
@@ -35,6 +36,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   heroku-api
   pry-debugger
   sinatra
