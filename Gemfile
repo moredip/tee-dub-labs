@@ -6,6 +6,6 @@ group :development do
   gem 'pry-debugger'
 end
 
-#group :ci do
+group :ci do
   gem 'heroku-api'
-#end
+end
