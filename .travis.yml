@@ -1,4 +1,4 @@
 script: echo WE WILL ASSUME SUCCESS
-after_script: ruby deploy/deploy_to_staging
+after_script: ruby deploy/deploy_to_staging.rb
 env: 
   - HEROKU_API_KEY=6cb7963c520b4710fcafdad1e8464374538dda25
