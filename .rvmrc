@@ -1,1 +1,1 @@
-rvm use --create default@tee-deploy
+rvm use --create default@tee-dub-labs
