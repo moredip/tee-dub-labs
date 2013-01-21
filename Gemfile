@@ -6,8 +6,10 @@ gem 'sass'
 
 group :development do
   gem 'pry-debugger'
+  gem 'heroku-headless'
 end
 
 group :ci do
   gem 'heroku-api'
+  gem 'heroku-headless'
 end

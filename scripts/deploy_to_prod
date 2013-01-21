@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
+require 'heroku-headless'
 
 require_relative 'source_secrets'
-require_relative 'deployer/disposable_deployer'
 
 PROD_APP_NAME='tee-dub-labs'
 
 source_secrets
-Deployer::Deployer.deploy( PROD_APP_NAME )
+HerokuHeadless::Deployer.deploy( PROD_APP_NAME )

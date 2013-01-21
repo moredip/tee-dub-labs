@@ -14,6 +14,8 @@ GEM
     haml (3.1.7)
     heroku-api (0.3.7)
       excon (~> 0.16.10)
+    heroku-headless (0.1.0)
+      heroku-api
     method_source (0.8.1)
     pry (0.9.11.4)
       coderay (~> 1.0.5)
@@ -39,6 +41,7 @@ PLATFORMS
 DEPENDENCIES
   haml
   heroku-api
+  heroku-headless
   pry-debugger
   sass
   sinatra

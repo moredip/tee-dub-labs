@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
-$LOAD_PATH << File.expand_path('../../scripts',__FILE__)
-
-require 'deployer/deployer'
+require 'heroku-headless'
 
 STAGING_APP_NAME='tee-dub-labs---staging'
 PROD_APP_NAME='tee-dub-labs'
@@ -11,13 +9,4 @@ unless ENV['HEROKU_API_KEY']
   exit 0
 end
 
-
-case ENV['TRAVIS_BRANCH']
-when 'master'
-  Deployer::Deployer.deploy( STAGING_APP_NAME )
-when 'prod_release_ptr'
-  Deployer::Deployer.deploy( PROD_APP_NAME )
-else
-  puts "unrecognized branch name: '#{ENV['TRAVIS_BRANCH']}'. Not doing anything."
-end
-
+HerokuHeadless::Deployer.deploy( STAGING_APP_NAME )
