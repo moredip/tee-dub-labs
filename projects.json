@@ -8,6 +8,10 @@
     "description": "Amazing stuff, does cool things."
   },
   {
+    "name": "super-duper",
+    "description": "Like the name says. It's super, and indeed duper."
+  },  
+  {
     "name": "apost",
     "description": "Pellentesque auctor purus sed libero mollis vulputate. Nulla a elit est, ultricies pretium felis. Ut luctus nisi congue justo faucibus consectetur a vel lectus."
   },
