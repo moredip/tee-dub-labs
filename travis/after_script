@@ -6,6 +6,11 @@ require 'deployer/deployer'
 STAGING_APP_NAME='tee-dub-labs---staging'
 PROD_APP_NAME='tee-dub-labs'
 
+unless ENV['HEROKU_API_KEY']
+  puts "No heroku api key in the environment. I can't deploy without it, so I'm bailing out now"
+  exit 0
+end
+
 
 case ENV['TRAVIS_BRANCH']
 when 'master'
