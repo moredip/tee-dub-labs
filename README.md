@@ -1,7 +1,7 @@
 TeeDub Labs
 ============
 
-[![Build Status](https://travis-ci.org/moredip/tee-dub-labs.png?branch=master)](undefined)
+[![Build Status](https://travis-ci.org/moredip/tee-dub-labs.png?branch=master)](https://travis-ci.org/moredip/tee-dub-labs)
 
 This is a strawman implementation of a community-maintained heroku-backed website. It's super-basic, and obviously the presentation is absolutely awful. The aim is to see how low-friction we can make community contributions to this kind of microsite.
 
