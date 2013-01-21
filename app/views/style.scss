@@ -1,4 +1,6 @@
 body {
+  padding: 0;
+  margin: 0;
   background-color: #222;
   color: #eee;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -24,5 +26,64 @@ section.project {
   }
   p {
     font-style: italic;
+  }
+}
+
+.clear {
+  clear: both;
+}
+
+body > footer {
+  background-color: #e6e6e6;
+  padding-top: 30px;
+  a {
+    color: #2b9ea6;
+    &:hover {
+      color: #c1d430;
+    }
+  }
+  > ul {
+    list-style: none;
+    margin-left: 0;
+    letter-spacing: -.25em;
+    > li {
+      display: inline-block;
+      vertical-align: top;
+      width: 50%;
+      letter-spacing: normal;
+      list-style-type: none;
+    }
+  }
+  ul.learn-more-links {
+    list-style: none;
+    margin-left: 0;
+    padding: 0;
+    li {
+      padding: 5px 0;
+      list-style-type: none;
+    }
+  }
+  .social-icons {
+    a {
+      display: inline-block;
+      opacity: 0.2;
+      margin: 20px;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+  .top-separator {
+    border-top: 1px solid #CCC;
+    padding-top: 2em;
+    margin-top: 2em;
+  }
+  .legalese {
+    color: #b3b3b3;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  h3 {
+    color: #666;
   }
 }
