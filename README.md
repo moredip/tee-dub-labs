@@ -8,6 +8,6 @@ The Staging app should always reflect the latest and greatest on `master` in the
 
 How Do I Contribute?
 ============
-- Edit projects.json, and then submit a pull request.
+- Edit `projects.json`, and then submit a pull request.
 - As soon as your pull request is pulled in you should see your change live on the [Staging app](http://tee-dub-labs---staging.herokuapp.com/). 
 - Once you've confirmed the changes look good someone with the heroku API key needs to run `scripts/deploy_to_prod`. Once that's done your changes are live on the [Production app](http://tee-dub-labs.herokuapp.com/).
