@@ -1,6 +1,8 @@
 TeeDub Labs
 ============
 
+[![Build Status](https://travis-ci.org/moredip/tee-dub-labs.png?branch=master)](undefined)
+
 This is a strawman implementation of a community-maintained heroku-backed website. It's super-basic, and obviously the presentation is absolutely awful. The aim is to see how low-friction we can make community contributions to this kind of microsite.
 
 There are two apps set up on Heroku, a [Staging app](http://tee-dub-labs---staging.herokuapp.com/) and a [Production app](http://tee-dub-labs.herokuapp.com/).
