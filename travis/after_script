@@ -1,2 +1,18 @@
-#!/bin/sh
-ruby scripts/deploy_to_staging.rb
+#!/usr/bin/env ruby
+$LOAD_PATH << File.expand_path('../../scripts',__FILE__)
+
+require 'deployer/deployer'
+
+STAGING_APP_NAME='tee-dub-labs---staging'
+PROD_APP_NAME='tee-dub-labs'
+
+
+case ENV['TRAVIS_BRANCH']
+when 'master'
+  Deployer::Deployer.deploy( STAGING_APP_NAME )
+when 'prod_release_ptr'
+  Deployer::Deployer.deploy( PROD_APP_NAME )
+else
+  puts "unrecognized branch name: '#{ENV['TRAVIS_BRANCH']}'. Not doing anything."
+end
+
