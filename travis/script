@@ -1,0 +1,2 @@
+#!/bin/sh
+env | sort | grep -v HEROKU_API_KEY
