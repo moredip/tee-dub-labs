@@ -4,6 +4,13 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+img.fork-flag {
+  position: absolute; 
+  top: 0; 
+  right: 0; 
+  border: 0;
+}
+
 section.project {
   float: left;
   background-color: #333;
