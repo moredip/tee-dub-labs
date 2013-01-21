@@ -1,3 +1,4 @@
+- subdomain = 'preview'
 !!! 5
 %html
   %head
@@ -7,4 +8,40 @@
     %a(href="https://github.com/moredip/tee-dub-labs")
       %img.fork-flag(src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub")
     = yield
-
+    .clear
+    %footer
+      %ul
+        %li
+          %h3 Learn more
+          %ul.learn-more-links
+            %li
+              %a{href:"http://#{subdomain}.thoughtworks.com/clients"} Clients
+            %li
+              %a{href:"http://#{subdomain}.thoughtworks.com/services"} Services
+            %li
+              %a{href:"http://#{subdomain}.thoughtworks.com/products"} Products
+            %li
+              %a{href:"http://#{subdomain}.thoughtworks.com/insights"} Insights
+            %li
+              %a{href:"http://#{subdomain}.thoughtworks.com/events"} Events
+            %li
+              %a{href:"http://#{subdomain}.thoughtworks.com/about-us"} About us
+            %li
+              %a{href:"http://#{subdomain}.thoughtworks.com/products"} Products
+            %li
+              %a{href:"http://join.thoughtworks.com/"} Careers
+            %li
+              %a{href:"http://#{subdomain}.thoughtworks.com/contact-us"} Contact Us
+        %li.social-icons
+          %a{href: "http://twitter.com/thoughtworks", title: 'Link to ThoughtWorks Twitter account'}
+            %img{src: "http://#{subdomain}.thoughtworks.com/imgs/icons/twitter_footer.png", alt: 'Twitter icon'}
+          %a{href: "http://facebook.com/thoughtworks", title: 'Link to ThoughtWorks Facebook page'}
+            %img{src: "http://#{subdomain}.thoughtworks.com/imgs/icons/facebook_footer.png", alt: 'Facebook icon'}
+          %a{href: "http://youtube.com/user/thoughtworks", title: 'Link to ThoughtWorks Youtube page'}
+            %img{src: "http://#{subdomain}.thoughtworks.com/imgs/icons/youtube_footer.png", alt: 'Youtube icon'}
+          %a{href: "http://linkedin.com/company/thoughtworks", title: 'Link to ThoughtWorks Linkedin page'}
+            %img{src: "http://#{subdomain}.thoughtworks.com/imgs/icons/linkedin_footer.png", alt: 'Linkedin icon'}
+      .top-separator
+        %p.legalese
+          = "© #{Date.today.year} ThoughtWorks, Inc. |"
+          %a{href: "http://#{subdomain}.thoughtworks.com/privacy-policy", title: 'Privacy policy'} Privacy policy
