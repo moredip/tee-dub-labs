@@ -2,6 +2,12 @@
 
 -@projects.each do |project|
   %section.project
-    %h1= project.name
-    %p= project.description
+    - project_info = capture_haml do
+      %h1= project.name
+      %p= project.description
+    - if project.link
+      %a{href: project.link}
+        = project_info
+    - else
+      = project_info
 

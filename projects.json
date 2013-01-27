@@ -1,5 +1,10 @@
 [
   {
+    "name": "Calatrava",
+    "description": "Calatrava is a cross-platform mobile framework that lets you share the core logic of your application across iOS, Android and Mobile Web, but unlike other XP toolkits it allows you to always write the highest quality native UI you need.",
+    "link": "http://calatrava.github.com/"
+  },
+  {
     "name": "cool project",
     "description": "This really is the cats pyjamas"
   },
